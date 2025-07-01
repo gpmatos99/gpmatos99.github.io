@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Oceanos - Piper e as Emoções</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Etapa 1: Piper -->
+    <div id="inicio" class="secao bg-piper">
+      <div class="conteudo-topo">
+        <h1>Olá, bem-vindo ao Oceanos!</h1>
+        <p>
+          Queres descobrir onde vais ficar durante esta viagem pelas minhas
+          emoções?
+        </p>
+        <h2>Qual é o teu agrupamento?</h2>
+        <select id="selectAgrupamento">
+          <option value="1100">Parque das Nações</option>
+          <option value="377">Leça da Palmeira</option>
+          <option value="797">Nova Oeiras</option>
+          <option value="413">Ferragudo</option>
+          <option value="692">São Jacinto</option>
+          <option value="235">Figueira da Foz</option>
+          <option value="216">São Martinho</option>
+          <option value="1117">Setúbal</option>
+          <option value="253">Seixal</option>
+          <option value="1180">Santa Cruz - Barreiro</option>
+        </select>
+        <br />
+        <button onclick="mostrarChapeu()">Continuar</button>
+      </div>
+    </div>
+
+    <!-- Etapa 2: Centro de comando -->
+    <div id="chapeu" class="secao bg-centro" style="display: none">
+      <div class="conteudo-topo">
+        <h2><strong>Centro de Comando</strong></h2>
+        <div id="suspense"></div>
+      </div>
+    </div>
+
+    <!-- Etapa 3: Resultado (emoção) -->
+    <div id="resultado" class="secao" style="display: none">
+      <div class="conteudo-topo" style="position: relative; z-index: 1">
+        <p id="tripulacao"></p>
+        <button onclick="voltarInicio()">Voltar ao início</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
