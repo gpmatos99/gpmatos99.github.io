@@ -1,0 +1,101 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 32px;
+  font-family: sans-serif;
+  overflow-x: hidden;
+  line-height: 1.2;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+}
+
+.bg-piper {
+  background-image: url('https://cdn.glitch.global/cf6ad571-0939-4400-86f0-a5c326e0bb2f/Piper.png?v=1749741637797');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-centro {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-emocao {
+  background-size: cover !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  transition: background-size 0.3s;
+}
+
+.conteudo-topo {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 0 0 24px 24px;
+  text-align: center;
+  padding: 1rem 2rem 2rem 2rem;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.5);
+}
+
+h1, h2, p, select, button {
+  font-size: 1em;
+  text-align: center;
+}
+
+select, button {
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+}
+
+button {
+  background: #2a8cff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #1864ab;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  html, body {
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+  }
+
+  .secao {
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .bg-emocao {
+    background-size: contain !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .conteudo-topo {
+    padding: 1rem;
+   
+  }
+}
