@@ -19,7 +19,7 @@ html, body {
 }
 
 .bg-piper {
-  background-image: url('https://cdn.glitch.global/cf6ad571-0939-4400-86f0-a5c326e0bb2f/Piper.png?v=1749741637797');
+  background-image: url('Piper.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
