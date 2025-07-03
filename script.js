@@ -1,50 +1,50 @@
 const agrupamentos = {
   797: {
     nome: "Nova Oeiras",
+    emocao: "Raiva",
+    img: {
+      desktop: "Piper_raiva.png",
+      mobile: "piper_raiva_tlm.png",
+    },
+  },
+  413: {
+    nome: "Ferragudo",
     emocao: "Tristeza",
     img: {
       desktop: "Piper_tristeza.png",
       mobile: "piper_tristeza_tlm.png",
     },
   },
-  413: {
-    nome: "Ferragudo",
-    emocao: "Medo",
-    img: {
-      desktop: "Piper_medo.png",
-      mobile: "Piper_medo_tlm.png",
-    },
-  },
   692: {
     nome: "São Jacinto",
-    emocao: "Medo",
+    emocao: "Repulsa",
     img: {
-      desktop: "Piper_medo.png",
-      mobile: "Piper_medo_tlm.png",
+      desktop: "Piper_nojo.png",
+      mobile: "piper_nojo_tlm.png",
     },
   },
   235: {
     nome: "Figueira da Foz",
-    emocao: "Alegria",
+    emocao: "Medo",
     img: {
-      desktop: "Piper_felicidade.png",
-      mobile: "Piper_felicidade_tlm.png",
+      desktop: "Piper_medo.png",
+      mobile: "Piper_medo_tlm.png",
     },
   },
   216: {
     nome: "São Martinho",
-    emocao: "Alegria",
+    emocao: "Repulsa",
     img: {
-      desktop: "Piper_felicidade.png",
-      mobile: "Piper_felicidade_tlm.png",
+      desktop: "Piper_nojo.png",
+      mobile: "piper_nojo_tlm.png",
     },
   },
   1100: {
     nome: "Parque das Nações",
-    emocao: "Raiva",
+    emocao: "Repulsa",
     img: {
-      desktop: "Piper_raiva.png",
-      mobile: "piper_raiva_tlm.png",
+      desktop: "Piper_nojo.png",
+      mobile: "piper_nojo_tlm.png",
     },
   },
   377: {
@@ -57,26 +57,26 @@ const agrupamentos = {
   },
   1117: {
     nome: "Setúbal",
-    emocao: "Repulsa",
+    emocao: "Medo",
     img: {
-      desktop: "Piper_nojo.png",
-      mobile: "piper_nojo_tlm.png",
+      desktop: "Piper_medo.png",
+      mobile: "Piper_medo_tlm.png",
     },
   },
   253: {
     nome: "Seixal",
-    emocao: "Vergonha",
+    emocao: "Raiva",
     img: {
-      desktop: "Piper_vergonha.png",
-      mobile: "Piper_vergonha_tlm.png",
+      desktop: "Piper_raiva.png",
+      mobile: "piper_raiva_tlm.png",
     },
   },
   1180: {
     nome: "Santa Cruz - Barreiro",
-    emocao: "Vergonha",
+    emocao: "Tristeza",
     img: {
-      desktop: "Piper_vergonha.png",
-      mobile: "Piper_vergonha_tlm.png",
+      desktop: "Piper_tristeza.png",
+      mobile: "piper_tristeza_tlm.png",
     },
   },
 };
