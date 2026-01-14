@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação para o Júri - IDS Machine Learning em Honeynets CPS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .slides-area {
+            flex: 1;
+            background: white;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 60px 80px;
+            animation: fadeIn 0.5s;
+            position: relative;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* TEMA ESCURO PROFISSIONAL */
+        .slide {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+        }
+
+        .slide h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #38bdf8;
+            border-bottom: 3px solid #38bdf8;
+            padding-bottom: 15px;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            color: #38bdf8;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .slide ul, .slide ol {
+            margin-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        .slide li {
+            margin-bottom: 12px;
+        }
+
+        .slide strong {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .slide .subtitle {
+            font-size: 1.6rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+        }
+
+        .slide .highlight {
+            background: rgba(56, 189, 248, 0.2);
+            padding: 20px;
+            border-left: 4px solid #38bdf8;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .slide .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        .column h3 {
+            margin-top: 0;
+        }
+
+        /* SLIDE TÍTULO */
+        .slide.title-slide {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.title-slide h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+        }
+
+        .slide.title-slide .subtitle {
+            margin-bottom: 60px;
+            font-size: 1.8rem;
+        }
+
+        .slide.title-slide .meta {
+            position: absolute;
+            bottom: 40px;
+            width: 100%;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* CONTROLES */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        button {
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #7dd3fc;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #64748b;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .slide-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* TIMER */
+        .timer {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 10px 20px;
+            border-radius: 4px;
+            color: #38bdf8;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 40px 60px;
+            }
+            .slide h1 { font-size: 2.5rem; }
+            .slide h2 { font-size: 2rem; }
+            .slide h3 { font-size: 1.5rem; }
+            .slide p, .slide li { font-size: 1.1rem; }
+        }
+
+        .callout-box {
+            background: rgba(34, 197, 94, 0.15);
+            border: 2px solid #22c55e;
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin: 10px 0;
+            color: #86efac;
+            font-weight: 500;
+        }
+
+        .progress-box {
+            background: rgba(129, 140, 248, 0.15);
+            border-left: 4px solid #818ff8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+    <div class="slides-area">
+
+        <!-- SLIDE 1: TITULO -->
+        <div class="slide title-slide active">
+            <div>
+                <h1>Detecção de Intrusão Baseada em Aprendizagem Automática</h1>
+                <p class="subtitle">para Honeynets de Sistemas Ciberfísicos</p>
+                <h3 style="color: #cbd5e1; font-size: 1.4rem; margin-top: 60px;">Guilherme Matos</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem;">fc62929</p>
+            </div>
+            <div class="meta">
+                <p><strong>Mestrado em Segurança da Informação</strong></p>
+                <p>Faculdade de Ciências, Universidade de Lisboa | 2025/2026</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: CONTEXTO -->
+        <div class="slide">
+            <h2>Contexto e Importância</h2>
+            <div>
+                <h3>Sistemas Ciberfísicos Críticos</h3>
+                <p>Formam a base de infraestruturas essenciais:</p>
+                <ul>
+                    <li><strong>Redes elétricas inteligentes</strong> (Smart Grids)</li>
+                    <li><strong>Sistemas de abastecimento de água</strong></li>
+                    <li><strong>Ambientes industriais</strong> (manufatura, processo)</li>
+                    <li><strong>Sistemas de transportes</strong> e saúde</li>
+                </ul>
+
+                <h3>Ataques Históricos Críticos</h3>
+                <ul>
+                    <li><strong>Stuxnet (2010):</strong> Danificou instalações nucleares iranianas</li>
+                    <li><strong>BlackEnergy (2015):</strong> Causou apagões em cascata na Ucrânia</li>
+                    <li><strong>Ekans & LockerGoga:</strong> Ransomwares desenhados para sistemas industriais</li>
+                </ul>
+
+                <div class="callout-box">
+                    ⚠️ <strong>Realidade Crítica:</strong> 65% das organizações possuem acesso remoto inadequadamente seguro a sistemas CPS
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: PROBLEMA -->
+        <div class="slide">
+            <h2>O Problema: Quatro Desafios Principais</h2>
+            <div>
+                <div class="highlight">
+                    <h3>1. Escassez de IDS Eficazes para CPS</h3>
+                    <p>Sistemas existentes foram desenvolvidos para ambientes corporativos. Protocolos heterogéneos industriais (Modbus, S7Comm, DNP3) carecem de soluções específicas.</p>
+                </div>
+
+                <div class="highlight">
+                    <h3>2. Detecção de Ataques Orquestrados Multi-Fase</h3>
+                    <p>Ameaças Persistentes Avançadas (APTs) executam múltiplas fases coordenadas: reconhecimento → compromisso → movimento lateral → persistência. IDS tradicionais analisam eventos isolados.</p>
+                </div>
+
+                <div class="highlight">
+                    <h3>3. Limitações de Datasets Existentes</h3>
+                    <p>Datasets públicos (UNSW-NB15, CICIDS2017, X-IIoTID) sofrem de desequilíbrio severo, falta de ataques multi-fase realistas e ausência de contexto operacional.</p>
+                </div>
+
+                <div class="highlight">
+                    <h3>4. Gerar Dados Realistas</h3>
+                    <p>Simular infraestruturas industriais complexas com múltiplos protocolos e campanhas de ataque multi-fase é extremamente desafiador.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: SOLUÇÃO -->
+        <div class="slide">
+            <h2>A Solução: Arquitectura Integrada</h2>
+            <div>
+                <div class="two-column">
+                    <div>
+                        <h3>Componente 1</h3>
+                        <strong>Dataset Robusto</strong>
+                        <ul style="font-size: 1.05rem;">
+                            <li>Ambiente reconfigurável baseado em Docker</li>
+                            <li>Protocolos industriais (Modbus/TCP, MQTT)</li>
+                            <li>Campanhas multi-fase controladas</li>
+                            <li>Labeling preciso (Ground-Truth)</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3>Componente 2</h3>
+                        <strong>Classificação ML</strong>
+                        <ul style="font-size: 1.05rem;">
+                            <li>Random Forest, XGBoost, AdaBoost</li>
+                            <li>Features multi-nível (rede, host, app)</li>
+                            <li>Precisão >90% (objetivo)</li>
+                            <li>Escalável para novos ataques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Componente 3: Correlação & Rastreamento</h3>
+                <ul>
+                    <li>Clustering de eventos (K-Means, DBSCAN) para agrupar ações relacionadas</li>
+                    <li>Análise temporal para reconstruir kill chains</li>
+                    <li>Detecção precoce de APTs antes de danos operacionais</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: ARQUITETURA -->
+        <div class="slide">
+            <h2>Arquitetura Modular do IDS</h2>
+            <div>
+                <h3>Módulo 1: Classificação de Ações</h3>
+                <p>Entrada: Fluxos de rede etiquetados</p>
+                <p>Processamento: Modelos ML (Random Forest, XGBoost) classificam cada evento</p>
+                <p>Saída: Eventos classificados como normais ou categorias de ataque</p>
+
+                <div style="margin: 30px 0; padding: 20px; background: rgba(56, 189, 248, 0.1); border-left: 4px solid #38bdf8; border-radius: 4px;">
+                    <strong style="color: #38bdf8;">⬇ Correlação Temporal ⬇</strong>
+                </div>
+
+                <h3>Módulo 2: Correlação & Predição de Campanhas</h3>
+                <p>Entrada: Ações de ataque classificadas</p>
+                <ul>
+                    <li>Correlação espacial e temporal de eventos</li>
+                    <li>Identificação de sequências (kill chains)</li>
+                    <li>Atribuição a campanhas específicas</li>
+                </ul>
+                <p style="margin-top: 20px;"><strong>Vantagem:</strong> Cada módulo pode ser otimizado independentemente. Classificadores precisos não dependem de correlação.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: PROGRESSO -->
+        <div class="slide">
+            <h2>O Que Já Fiz</h2>
+            <div>
+                <div class="progress-box">
+                    ✅ <strong>Revisão Bibliográfica Completa</strong><br>
+                    80+ papers analisados. Lacunas identificadas e documentadas.
+                </div>
+
+                <div class="progress-box">
+                    ✅ <strong>Especificação do Ambiente de Simulação</strong><br>
+                    Integração com honeynet reconfigurável Sousa et al. (2024). Arquitetura com 3 módulos (Coordinator, Attack, Data Collection).
+                </div>
+
+                <div class="progress-box">
+                    ✅ <strong>Plano de Trabalho Detalhado</strong><br>
+                    5 etapas definidas: Geração → Análise → Classificação → Correlação → Teste. Métricas apropriadas para ambientes desbalanceados.
+                </div>
+
+                <div class="progress-box">
+                    ✅ <strong>Relatório Inicial Completo</strong><br>
+                    30+ páginas. Fundamentação, problema, solução, metodologia. 76 referências. Verificado para erros.
+                </div>
+
+                <p style="margin-top: 30px; color: #86efac; font-weight: 600;">
+                    <strong>Status:</strong> Pronto para fase de implementação
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: CRONOGRAMA -->
+        <div class="slide">
+            <h2>Cronograma & Próximos Passos</h2>
+            <div>
+                <div style="font-size: 1.05rem;">
+                    <p><strong style="color: #fbbf24;">Janeiro-Fevereiro 2026</strong> (Agora)<br>
+                    Configuração do ambiente, definição de cenários de ataque</p>
+
+                    <p><strong style="color: #fbbf24;">Fevereiro-Março 2026</strong><br>
+                    Execução de campanhas, recolha de dados, etiquetagem, extração de features</p>
+
+                    <p><strong style="color: #fbbf24;">Março-Abril 2026</strong><br>
+                    Treino de modelos de classificação, comparação de algoritmos</p>
+
+                    <p><strong style="color: #fbbf24;">Abril-Maio 2026</strong><br>
+                    Desenvolvimento do módulo de correlação, testes com ataques novos</p>
+
+                    <p><strong style="color: #fbbf24;">Maio-Junho 2026</strong><br>
+                    Validação operacional, escrita final da dissertação</p>
+                </div>
+
+                <div class="callout-box" style="margin-top: 30px;">
+                    📊 <strong>Objetivo Final:</strong> Sistema de detecção e rastreamento de campanhas APT multi-fase em ambientes ciberfísicos, com >90% precisão
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: DESAFIOS -->
+        <div class="slide">
+            <h2>Desafios Antecipados</h2>
+            <div>
+                <h3>1. Desequilíbrio de Classes</h3>
+                <p>Ataques são eventos raros. Mitigação: SMOTE, weighted loss functions, balanceamento parametrizado no gerador de dados.</p>
+
+                <h3>2. Generalização de Modelos</h3>
+                <p>Modelos treinados em simulação podem não generalizar. Foco em features semânticas (nível de protocolo), não apenas estatísticas agregadas.</p>
+
+                <h3>3. Correlação Multi-Atacante</h3>
+                <p>Distinguir entre múltiplos atacantes simultâneos é complexo. Uso de técnicas probabilísticas e análise de contexto operacional.</p>
+
+                <h3>4. Requisitos de Tempo Real</h3>
+                <p>IDS deve processar com latência <100ms. Otimização agressiva do pipeline e dos modelos necessária.</p>
+
+                <p style="margin-top: 30px; color: #fbbf24;">
+                    <strong>Estratégia:</strong> Endereçar cada desafio iterativamente durante fase de desenvolvimento
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: CONTRIBUIÇÕES -->
+        <div class="slide">
+            <h2>Contribuições Esperadas</h2>
+            <div>
+                <div class="two-column">
+                    <div>
+                        <h3>Investigação</h3>
+                        <ul style="font-size: 1.05rem;">
+                            <li><strong>Dataset robusto:</strong> Balanceado, multi-fase, realista</li>
+                            <li><strong>Framework IDS:</strong> Classificação + correlação integradas</li>
+                            <li><strong>Validação ML:</strong> Comparação empírica de algoritmos</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3>Prática</h3>
+                        <ul style="font-size: 1.05rem;">
+                            <li><strong>Sistema operacional:</strong> Pronto para ambientes reais</li>
+                            <li><strong>Código aberto:</strong> Honeynet e IDS públicos</li>
+                            <li><strong>Documentação:</strong> Guias de deployme e uso</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Publicações Científicas (Esperadas)</h3>
+                <ul>
+                    <li>Paper sobre geração de dataset e análise de representatividade</li>
+                    <li>Paper sobre detecção e correlação de campanhas multi-fase</li>
+                    <li>Contribuição para estado da arte em IDS para CPS</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: CONCLUSÃO -->
+        <div class="slide">
+            <h2>Conclusão</h2>
+            <div style="display: flex; flex-direction: column; justify-content: space-around; height: 100%; padding: 40px 0;">
+                <div>
+                    <h3 style="color: #22c55e;">O Problema</h3>
+                    <p>Infraestruturas críticas enfrentam APTs sofisticadas. IDS tradicionais não detectam campanhas orquestradas multi-fase.</p>
+                </div>
+
+                <div>
+                    <h3 style="color: #3b82f6;">A Solução</h3>
+                    <p>Framework integrado de IDS com classificação de ações + correlação de campanhas, suportado por dataset robusto de honeynet simulada.</p>
+                </div>
+
+                <div>
+                    <h3 style="color: #f59e0b;">O Status</h3>
+                    <p>Especificação e fundamentação completas. Pronto para fase de implementação imediata.</p>
+                </div>
+
+                <div>
+                    <h3 style="color: #ec4899;">A Expectativa</h3>
+                    <p>Sistema operacional capaz de detectar e rastrear campanhas de ataque, melhorando segurança de infraestruturas críticas.</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; font-size: 1.3rem; color: #38bdf8; font-weight: 600;">
+                    Obrigado. Questões?
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CONTROLES -->
+    <div class="timer" id="timer">00:00</div>
+    <div class="slide-indicator" id="indicator"></div>
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Próximo →</button>
+    </div>
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    const totalSlides = document.querySelectorAll('.slide').length;
+    let startTime = Date.now();
+    let isPaused = false;
+
+    document.getElementById('totalSlides').textContent = totalSlides;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.slide');
+        
+        if (n > totalSlides) currentSlide = totalSlides;
+        if (n < 1) currentSlide = 1;
+        
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide - 1].classList.add('active');
+        
+        document.getElementById('currentSlide').textContent = currentSlide;
+        document.getElementById('prevBtn').disabled = currentSlide === 1;
+        document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        
+        updateIndicator();
+    }
+
+    function changeSlide(n) {
+        currentSlide += n;
+        showSlide(currentSlide);
+    }
+
+    function updateIndicator() {
+        const indicator = document.getElementById('indicator');
+        const estimatedDuration = 12 * 60; // 12 minutos
+        const timePerSlide = estimatedDuration / totalSlides;
+        const estimatedMinutes = Math.round(timePerSlide * (currentSlide - 1) / 60);
+        const estimatedSeconds = Math.round((timePerSlide * (currentSlide - 1)) % 60);
+        
+        indicator.textContent = `Slide ${currentSlide}/${totalSlides} • ~${estimatedMinutes}m ${estimatedSeconds}s`;
+    }
+
+    function updateTimer() {
+        if (isPaused) return;
+        
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        
+        document.getElementById('timer').textContent = 
+            String(minutes).padStart(2, '0') + ':' + 
+            String(seconds).padStart(2, '0');
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        if (e.key === 'ArrowRight') changeSlide(1);
+        if (e.key === ' ') {
+            e.preventDefault();
+            isPaused = !isPaused;
+        }
+    });
+
+    // Update timer every second
+    setInterval(updateTimer, 1000);
+
+    // Initialize
+    showSlide(currentSlide);
+</script>
+
+</body>
+</html>
